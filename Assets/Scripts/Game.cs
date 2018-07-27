@@ -5,17 +5,26 @@ using UnityEngine.SceneManagement;
 
 public static class Game {
 
+    #region Delegates and Events
+
     public delegate void GameOverAction();
     public static event GameOverAction GameOverEvent;
 
-    public static ScoreManager ScoreManager
-    {
-        get; private set;
-    }
+    #endregion
+
+    
+
+    public static ScoreManager ScoreManager { get; private set; }
+
+    public static Difficulty CurrentDifficulty { get; set; }
+
+    public static bool OnPause { get; private set; }
+    
 
     static Game()
     {
         ScoreManager = new ScoreManager();
+        CurrentDifficulty = Difficulties.Easy;
     }
 
 
@@ -39,10 +48,12 @@ public static class Game {
     public static void PauseOn()
     {
         Time.timeScale = 0;
+        OnPause = true;
     }
 
     public static void PauseOff()
     {
         Time.timeScale = 1;
+        OnPause = false;
     }
 }

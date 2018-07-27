@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class ScoreCircleComponent : MonoBehaviour {
 
-    private void Awake()
+    private void Start()
     {
+        
     }
 
     private void OnMouseDown()
     {
-        Game.ScoreManager.AddScore();
-        Destroy(this.gameObject);
+        if (!Game.OnPause)
+        {
+            Game.ScoreManager.AddScore();
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -11,6 +11,9 @@ public class RedCircleComponent : MonoBehaviour {
 
     private void OnMouseDown()
     {
-        Game.GameOver();
+        if (!Game.OnPause)
+        {
+            Game.GameOver();
+        }
     }
 }

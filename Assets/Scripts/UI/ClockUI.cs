@@ -3,29 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ClockUI : MonoBehaviour {
+public class ClockUI : MonoBehaviour
+{
+    [SerializeField]
+    private GameObject _scriptsGameObject;
 
-    private float _time = 0;
+    private GameTime _gameTime;
     private Text _text;
 
-    private void Awake()
+    // Use this for initialization
+    void Start()
     {
         _text = GetComponent<Text>();
-        _time = 0;
+        _gameTime = _scriptsGameObject.GetComponent<GameTime>();
     }
 
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update()
+    {
+        float time = _gameTime.CurrentTime;
 
-        _time += Time.deltaTime;
-
-        int minutes = (int)(_time / 60);
-        int seconds = (int)(_time % 60);
+        int minutes = (int)(time / 60);
+        int seconds = (int)(time % 60);
 
         _text.text = string.Format("{0:d2}:{1:d2}", minutes, seconds);
     }

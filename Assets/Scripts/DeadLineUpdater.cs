@@ -7,16 +7,11 @@ public class DeadLineUpdater : MonoBehaviour {
 
     [SerializeField]
     private GameObject _progressBarObject;
-
-    [SerializeField]
-    [Range(1, float.MaxValue)]
-    private float _timeToDeath = 5;
-
-
+    
     private ProgressBar _progressBar;
 
     private bool isAlreadyZero = false;
-
+    private float _timeToDeath;
     private int _score;
 
 
@@ -28,7 +23,9 @@ public class DeadLineUpdater : MonoBehaviour {
 	    
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+    {
+        _timeToDeath = Game.CurrentDifficulty.DeadLineExpiredTime;
 
         if (Game.ScoreManager.Score > _score)
         {
@@ -45,5 +42,6 @@ public class DeadLineUpdater : MonoBehaviour {
             Game.GameOver();
             isAlreadyZero = true;
         }
+
     }
 }

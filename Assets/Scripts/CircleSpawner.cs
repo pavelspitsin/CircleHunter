@@ -70,12 +70,15 @@ public class CircleSpawner : MonoBehaviour {
     {
         while (true)
         {
-            RandomSpawn(greenCircle_Prefab, _greenCircleSize, 1);
+            RandomSpawn(greenCircle_Prefab, _greenCircleSize, Game.CurrentDifficulty.CircleLifeTime);
 
-            if (Random.Range(0f, 1f) < 0.2)
-                RandomSpawn(redCircle_Prefab, _redCircleSize, 1);
+            if (Random.Range(0f, 1f) < Game.CurrentDifficulty.ProbabilityAddSecondCircle)
+                RandomSpawn(greenCircle_Prefab, _greenCircleSize, Game.CurrentDifficulty.CircleLifeTime);
 
-            yield return new WaitForSeconds(0.5f);
+            if (Random.Range(0f, 1f) < Game.CurrentDifficulty.ProbabilityAddRedCircle)
+                RandomSpawn(redCircle_Prefab, _redCircleSize, Game.CurrentDifficulty.CircleLifeTime);
+
+            yield return new WaitForSeconds(Game.CurrentDifficulty.FrequencyAddCircle);
         }
     }
 
